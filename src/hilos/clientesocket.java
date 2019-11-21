@@ -30,6 +30,8 @@ public class clientesocket extends Thread implements Runnable  {
         this.puertoServidor = String.valueOf(cliente.getLocalPort());
         this.start();
     }
+    
+    
      public void addListenner(ClientListener aux) {
         try {
             clientListener = aux;

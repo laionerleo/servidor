@@ -18,16 +18,12 @@ public class cliente  extends EventObject{
     private String identificador;
     boolean clientConect = true;
     clientesocket clientsock;
-    ClientListener clientListener;
+    
 
     public cliente(Object source, String identificador, clientesocket nuevoCliente) {
         super(source);
         this.identificador=identificador;
         this.clientsock=nuevoCliente;
-    }
-
-    public cliente(Socket clientSock) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
