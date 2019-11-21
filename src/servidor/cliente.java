@@ -7,18 +7,23 @@ package servidor;
 
 import java.net.Socket;
 import escuchadores.ClientListener;
+import java.util.EventObject;
+import hilos.clientesocket;
 
 /**
  *
  * @author laioner
  */
-public class cliente {
+public class cliente  extends EventObject{
     private String identificador;
-    Socket cliente;
-    String ip;
-    String puertoServidor;
     boolean clientConect = true;
-    //Lisener 
+    clientesocket clientsock;
     ClientListener clientListener;
+
+    public cliente(Object source, String identificador, clientesocket nuevoCliente) {
+        super(source);
+        this.identificador=identificador;
+        this.clientsock=nuevoCliente;
+    }
     
 }

@@ -5,6 +5,7 @@
  */
 package hilos;
 
+import escuchadores.ClientListener;
 import java.io.DataInputStream;
 import java.io.InputStream;
 import java.net.Socket;
@@ -20,12 +21,21 @@ public class clientesocket extends Thread implements Runnable  {
      String ip;
     String puertoServidor;
     boolean clientConect = true;
+    ClientListener clientListener;
 
     public clientesocket(Socket cliente) {
         this.cliente = cliente;
           this.ip = cliente.getInetAddress().getHostAddress();
         this.puertoServidor = String.valueOf(cliente.getLocalPort());
         this.start();
+    }
+     public void addListenner(ClientListener aux) {
+        try {
+            clientListener = aux;
+        } catch (Exception e) {
+            System.out.println("No adiciono el escuchador de forma correcta");
+        }
+
     }
     
     
