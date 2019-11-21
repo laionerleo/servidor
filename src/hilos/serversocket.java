@@ -5,6 +5,8 @@
  */
 package hilos;
 
+import escuchadores.ClientListener;
+import eventos.EventConexion;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -17,6 +19,8 @@ import java.net.Socket;
 //import socketservidor.escuchadores.ClientListener;
 import java.io.IOException;
 import java.io.OutputStream;
+import servidor.cliente;
+import servidor.servidorsocket;
 //import socketservidor.escuchadores.MensajeListener;
 
 /**
@@ -28,7 +32,7 @@ public class serversocket extends Thread implements Runnable {
     int puerto;
     ServerSocket serverSocket;
    boolean sw = true;
-    //ClientListener clientListener;
+    ClientListener clientListener;
     ///MensajeListener mensajeListener;
 
     //-----CONSTRUCTOR----
@@ -87,7 +91,7 @@ public class serversocket extends Thread implements Runnable {
             serverSocket = new ServerSocket(puerto); //Creamos el socket servidor.
             System.out.println("Esperando conexiones...");
             while (sw) {
-                Socket clientSock = serverSocket.accept();
+                Socket Socket = serverSocket.accept();
 
                 System.out.println("aqui");
                 //DataInputStream entrada = new DataInputStream(clientSock.getInputStream());
@@ -99,16 +103,27 @@ public class serversocket extends Thread implements Runnable {
                 //Thread hilo = new Thread(new NuevoCliente(clientSock));
                 //Aqui hacer el evento
                 //Evento de conectar
-                //NuevoCliente nuevoCliente = new NuevoCliente(clientSock);
-
-                //nuevoCliente.addListenner(clientListener, mensajeListener);
+                clientesocket clientesock = new clientesocket(Socket);
+                   
+//                clientSock./*addListenner*/(clientListener);
                 //Zacary ahsCode nul
-                //clientListener.conectarCliente(new EventConeccion(puerto, new InformacionCliente(puerto, String.valueOf(nuevoCliente.hashCode()), nuevoCliente)));
+               // clientListener.conectarCliente(new EventConeccion(puerto, new InformacionCliente(puerto, String.valueOf(nuevoCliente.hashCode()), nuevoCliente)));
+                clientListener.conectarCliente(new EventConexion(puerto ,new cliente(puerto, clientesock.getName(), clientesock)));
 
             }
         } catch (Exception ex) {
             System.out.println("Error de Coneccion");
         }
+    }
+
+    public void addListenner(servidorsocket aux) {
+         try {
+            clientListener = aux;
+            
+        } catch (Exception e) {
+            System.out.println("No adiciono el escuchador de forma correcta");
+        }
+
     }
 
 }

@@ -25,5 +25,11 @@ public class cliente  extends EventObject{
         this.identificador=identificador;
         this.clientsock=nuevoCliente;
     }
+
+    public cliente(Socket clientSock) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     
 }

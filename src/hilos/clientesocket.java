@@ -22,6 +22,7 @@ public class clientesocket extends Thread implements Runnable  {
     String puertoServidor;
     boolean clientConect = true;
     ClientListener clientListener;
+    
 
     public clientesocket(Socket cliente) {
         this.cliente = cliente;
