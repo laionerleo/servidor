@@ -12,12 +12,12 @@ import java.io.PrintWriter;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import socketservidor.Eventos.EventConeccion;
-import socketservidor.InformacionCliente;
-import socketservidor.escuchadores.ClientListener;
+//import socketservidor.Eventos.EventConeccion;
+//import socketservidor.InformacionCliente;/
+//import socketservidor.escuchadores.ClientListener;
 import java.io.IOException;
 import java.io.OutputStream;
-import socketservidor.escuchadores.MensajeListener;
+//import socketservidor.escuchadores.MensajeListener;
 
 /**
  *
@@ -27,7 +27,7 @@ public class serversocket extends Thread implements Runnable {
 
     int puerto;
     ServerSocket serverSocket;
-    boolean encApagado = true;
+   boolean sw = true;
     //ClientListener clientListener;
     ///MensajeListener mensajeListener;
 
@@ -68,7 +68,7 @@ public class serversocket extends Thread implements Runnable {
     }
 
     //En este metodo se aficiona el escuchador de la clase ServerSocket
-    public void addListenner(ClientListener aux, MensajeListener men) {
+    /*public void addListenner(ClientListener aux, MensajeListener men) {
         try {
             //clientListener = aux;
             //mensajeListener = men;
@@ -77,6 +77,7 @@ public class serversocket extends Thread implements Runnable {
         }
 
     }
+    */
 
     //-----RUNNABLE-----
     //Metodo sobreescrito de Runnable
@@ -85,7 +86,7 @@ public class serversocket extends Thread implements Runnable {
         try {
             serverSocket = new ServerSocket(puerto); //Creamos el socket servidor.
             System.out.println("Esperando conexiones...");
-            while (encApagado) {
+            while (sw) {
                 Socket clientSock = serverSocket.accept();
 
                 System.out.println("aqui");

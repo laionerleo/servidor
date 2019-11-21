@@ -6,7 +6,7 @@
 package eventos;
 
 import java.util.EventObject;
-import socketservidor.InformacionCliente;
+import servidor.cliente;
 
 /**
  *
@@ -14,19 +14,19 @@ import socketservidor.InformacionCliente;
  */
 public class EventConexion extends EventObject{
 
-     private InformacionCliente cliente;
+     private cliente cliente;
     
-    public EventConexion(Object source, InformacionCliente cliente) {
+    public EventConexion(Object source, cliente cliente) {
         super(source);
         this.cliente=cliente;
     }
 
-    public InformacionCliente getCliente() {
+    public cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(InformacionCliente cliente) {
-        this.cliente = cliente;
+    public void setCliente(cliente cl) {
+        this.cliente = cl;
     }
     
 }
