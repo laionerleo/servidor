@@ -34,7 +34,7 @@ public class clientesocket extends Thread implements Runnable  {
     
      public void addListenner(ClientListener aux) {
         try {
-            clientListener = aux;
+            this.clientListener = aux;
         } catch (Exception e) {
             System.out.println("No adiciono el escuchador de forma correcta");
         }
@@ -50,9 +50,8 @@ public class clientesocket extends Thread implements Runnable  {
                 System.out.println("Se ha conectado: " + cliente.getInetAddress().getHostName());
                 InputStream inputStream = cliente.getInputStream();
                 DataInputStream entrada = new DataInputStream(inputStream);
-               // entrada=new BufferedReader(new InputStreamReader(cliente.getInputStream()));
                 while (clientConect) {
-                    //mensajeRecibido = entrada.readLine();//Leemos
+                    
                     mensajeRecibido = entrada.readUTF();//Leemos
                     if (mensajeRecibido.length() > 0) {
                             System.out.println("mensaje:"+mensajeRecibido);
@@ -64,8 +63,8 @@ public class clientesocket extends Thread implements Runnable  {
             }
 
         } catch (Exception ex) {
-            //log("Lost a connection. \n");
             System.out.println("lost a conexion  \n");
+            cliente.close();
             this.stop();
             //Logger.getLogger(ServerSocket.class.getName()).log(Level.SEVERE, null, ex);
         }

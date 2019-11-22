@@ -8,6 +8,7 @@ package servidor;
 import escuchadores.ClientListener;
 import eventos.EventConexion;
 import hilos.serversocket;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -23,6 +24,12 @@ public class servidorsocket implements ClientListener {
         this.listaclientes = listaclientes;
         this.puerto = puerto;
         this.ssock = null;
+    }
+      public servidorsocket(int puerto) {
+       
+        this.puerto = puerto;
+        this.ssock = null;
+
     }
 
     @Override
