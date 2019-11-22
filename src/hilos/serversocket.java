@@ -25,7 +25,7 @@ import servidor.servidorsocket;
 
 /**
  *
- * @author Brayan
+ 
  */
 public class serversocket extends Thread implements Runnable {
 
@@ -33,55 +33,21 @@ public class serversocket extends Thread implements Runnable {
     ServerSocket serverSocket;
    boolean sw = true;
     ClientListener clientListener;
-    ///MensajeListener mensajeListener;
 
-    //-----CONSTRUCTOR----
-    //Constructor del ServidorRun
     public serversocket(int puerto) {
         try {
             this.puerto = puerto;
             this.start();
-            //clientListener = null;
+            clientListener = null;
+
         } catch (Exception e) {
 
             System.out.println("No se pudo  Crear el servidor de forma Correcta");
         }
     }
 
-    //------METODOS-------
-    //Mata el hilo de forma correcta
-    public void matarHilo() {
 
-        try {
 
-            serverSocket.close();
-            //System.out.println("Cargando...");
-            sleep(1000);
-            join();
-            System.out.println("Se mato el hilo");
-
-        } catch (InterruptedException ex) {
-
-            System.out.println("No se pudo matar el hilo de forma correcta interrumpt");
-
-        } catch (Exception e) {
-
-            System.out.println("No se pudo matar el hilo de forma correcta");
-        }
-
-    }
-
-    //En este metodo se aficiona el escuchador de la clase ServerSocket
-    /*public void addListenner(ClientListener aux, MensajeListener men) {
-        try {
-            //clientListener = aux;
-            //mensajeListener = men;
-        } catch (Exception e) {
-            System.out.println("No adiciono el escuchador de forma correcta");
-        }
-
-    }
-    */
 
     //-----RUNNABLE-----
     //Metodo sobreescrito de Runnable
@@ -91,28 +57,20 @@ public class serversocket extends Thread implements Runnable {
             serverSocket = new ServerSocket(puerto); //Creamos el socket servidor.
             System.out.println("Esperando conexiones...");
             while (sw) {
-                Socket Socket = serverSocket.accept();
+                Socket Sock = serverSocket.accept();
 
                 System.out.println("aqui");
-                //DataInputStream entrada = new DataInputStream(clientSock.getInputStream());
-                //System.out.println(entrada);
-                // mensajeRecibido = entrada.readUTF();//Leemos respuesta
-                // System.out.println(mensajeRecibido);
+            
                 System.out.println("Nuevo Cliente Conectado");
 
-                //Thread hilo = new Thread(new NuevoCliente(clientSock));
-                //Aqui hacer el evento
-                //Evento de conectar
-                clientesocket clientesock = new clientesocket(Socket);
-                   
-//                clientSock./*addListenner*/(clientListener);
-                //Zacary ahsCode nul
-               // clientListener.conectarCliente(new EventConeccion(puerto, new InformacionCliente(puerto, String.valueOf(nuevoCliente.hashCode()), nuevoCliente)));
+                clientesocket clientesock = new clientesocket(Sock);
+                clientesock.addListenner(clientListener);
+
                 clientListener.conectarCliente(new EventConexion(puerto ,new cliente(puerto, clientesock.getName(), clientesock)));
 
             }
         } catch (Exception ex) {
-            System.out.println("Error de Coneccion");
+            System.out.println("Error de Coneccion="+ex);
         }
     }
 
